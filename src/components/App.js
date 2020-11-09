@@ -10,6 +10,9 @@ import ClientList from './client/ClientList';
 import ClientDetails from './client/ClientDetails';
 import CreateCLient from './client/CreateClient';
 
+import BookingList from './booking/BookingList';
+import BookingDetails from './booking/BookingDetails';
+
 import NotFoundPage from './NotFoundPage';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -41,7 +44,11 @@ class App extends React.Component {
                 Clients
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="3">Réservation</Menu.Item>
+            <Menu.Item key="3">
+              <NavLink exact to="/bookings">
+                Réservation
+              </NavLink>
+            </Menu.Item>
           </Menu>
         </Header>
         <Layout>
@@ -64,6 +71,9 @@ class App extends React.Component {
               <Route exact path="/Clients" component={ClientList} />
               <Route exact path="/ClientDetails" component={ClientDetails} />
               <Route exact path="/CreateCLient" component={CreateCLient} />
+
+              <Route exact path="/Bookings" component={BookingList} />
+              <Route exact path="/BookingDetails" component={BookingDetails} />
 
               <Route component={NotFoundPage} />
             </Switch>

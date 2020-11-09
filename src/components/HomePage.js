@@ -35,7 +35,6 @@ const HomePage = props => {
         </Button>
       </div>
       <Title>Liste des apartements : </Title>
-
       <ApartmentList apartments={apartments} />
     </div>
   ) : (

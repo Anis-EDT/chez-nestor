@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
 
     case GET_APARTMENT_ROOMS_BY_ID: {
       return {
-        ...state,
+        apartments: state.apartments,
         currentApartment: {
           rooms: action.payload.data,
           id: action.payload.id

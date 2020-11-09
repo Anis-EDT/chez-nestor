@@ -49,9 +49,7 @@ export const getClientById = id => async dispatch => {
 export const addClient = payload => async dispatch => {
   const path = `${API_ENDPOINT}/client`;
   try {
-    console.log('payload', payload);
-    const res = await axios.post(path, payload);
-    console.log('res', res);
+    await axios.post(path, payload);
   } catch (e) {
     dispatch({
       type: ERROR,

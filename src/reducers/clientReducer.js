@@ -11,9 +11,8 @@ export default function(state = initialState, action) {
     }
 
     case GET_CLIENT_BY_ID: {
-      console.log('in reducer', action.payload);
       return {
-        ...state,
+        clients: state.clients,
         currentClient: action.payload.client
       };
     }

@@ -9,12 +9,12 @@ const { Title } = Typography;
 
 const ClientDetails = props => {
   const clientId = props.location.state.client;
+
   useEffect(() => {
     props.getClientById(clientId);
   }, []);
 
   const client = props.clientReducer.currentClient;
-  console.log;
 
   // eslint-disable-next-line react/prop-types
   return (
