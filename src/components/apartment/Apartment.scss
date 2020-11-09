@@ -1,0 +1,28 @@
+.apartment-list-card {
+  // important is mandatory to override the margin of antd card
+  margin: 20px !important;
+}
+.apartment-details-infinite-container {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 300px;
+  width: 60%;
+}
+.apartment-details-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+}
+.ant-list-item {
+  display: block !important;
+}
+.apartment-details-price {
+  display: flex;
+  justify-content: flex-end;
+}
+.apartment-details-rooms-container {
+  display: flex;
+}

@@ -1,28 +1,38 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 //import intl from 'react-intl-universal';
 import { getApartments } from './../actions/apartment';
+import { Breadcrumb, Button } from 'antd';
+import ApartmentList from './apartment/ApartmentList';
 //import * as Dialog from '../shared/Dialog';
 //import PropTypes from 'prop-types';
+import './HomePage.scss';
 
-//import { GET_APARTMENTS } from './../constants/types';
-const HomePage = () => {
+const HomePage = props => {
+  const history = useHistory();
+
   useEffect(() => {
-    console.log('hehi');
-    this.props.getApartments();
+    props.getApartments();
   }, []);
+  const apartments = props.apartmentReducer.apartments;
+  const createApartment = () => {
+    history.push('/createApartment');
+  };
   return (
     <div>
-      <h1>React Slingshot</h1>
-
-      <h2>Get Started</h2>
-      <ol>
-        <li>
-          Review the <Link to="/">demo app</Link>
-        </li>
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
+      <div className="container-header">
+        <Breadcrumb>
+          <Breadcrumb.Item>Accueil</Breadcrumb.Item>
+          <Breadcrumb.Item>Appartements</Breadcrumb.Item>
+        </Breadcrumb>
+        <Button type="primary" onClick={() => createApartment()}>
+          Ajouter un appartement
+        </Button>
+      </div>
+      <ApartmentList apartments={apartments} />
     </div>
   );
 };
@@ -35,6 +45,5 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   ...state
 });
-//const mapStateToProps = state => ({ apartments: state.apartments });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
