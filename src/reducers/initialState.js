@@ -1,4 +1,4 @@
 export default {
   apartments: [],
-  currentApartmentRooms: []
+  currentApartment: { id: '', rooms: [] }
 };

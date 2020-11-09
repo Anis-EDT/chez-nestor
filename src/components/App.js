@@ -4,6 +4,7 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import HomePage from './HomePage';
 import ApartmentDetails from './apartment/ApartmentDetails';
 import createApartment from './apartment/createApartment';
+import createRoom from './apartment/createRoom';
 
 import NotFoundPage from './NotFoundPage';
 import PropTypes from 'prop-types';
@@ -37,7 +38,7 @@ class App extends React.Component {
             </Menu>
           </Header>
           <Layout>
-            <Content style={{ padding: '0 50px' }}>
+            <Content style={{ padding: '25px 50px' }}>
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route
@@ -50,6 +51,7 @@ class App extends React.Component {
                   path="/createApartment"
                   component={createApartment}
                 />
+                <Route exact path="/createRoom" component={createRoom} />
                 <Route component={NotFoundPage} />
               </Switch>
             </Content>

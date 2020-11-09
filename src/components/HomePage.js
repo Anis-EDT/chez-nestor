@@ -5,11 +5,13 @@ import { useHistory } from 'react-router-dom';
 
 //import intl from 'react-intl-universal';
 import { getApartments } from './../actions/apartment';
-import { Breadcrumb, Button } from 'antd';
+import { Breadcrumb, Button, Spin, Typography } from 'antd';
 import ApartmentList from './apartment/ApartmentList';
 //import * as Dialog from '../shared/Dialog';
 //import PropTypes from 'prop-types';
 import './HomePage.scss';
+
+const { Title } = Typography;
 
 const HomePage = props => {
   const history = useHistory();
@@ -17,11 +19,13 @@ const HomePage = props => {
   useEffect(() => {
     props.getApartments();
   }, []);
+
   const apartments = props.apartmentReducer.apartments;
+
   const createApartment = () => {
     history.push('/createApartment');
   };
-  return (
+  return apartments ? (
     <div>
       <div className="container-header">
         <Breadcrumb>
@@ -32,7 +36,13 @@ const HomePage = props => {
           Ajouter un appartement
         </Button>
       </div>
+      <Title>Liste des apartements : </Title>
+
       <ApartmentList apartments={apartments} />
+    </div>
+  ) : (
+    <div className="apartment-details-loading-container">
+      <Spin />
     </div>
   );
 };

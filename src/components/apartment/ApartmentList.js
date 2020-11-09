@@ -14,6 +14,7 @@ const ApartmentList = props => {
       apartment: apartment
     });
   };
+
   return (
     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
       {props.apartments.map((el, key) => (

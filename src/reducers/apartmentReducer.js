@@ -1,8 +1,4 @@
-import {
-  GET_APARTMENTS,
-  CREATE_APARTMENTS,
-  GET_APARTMENT_ROOMS_BY_ID
-} from '../constants/types';
+import { GET_APARTMENTS, GET_APARTMENT_ROOMS_BY_ID } from '../constants/types';
 import initialState from './initialState';
 
 export default function(state = initialState, action) {
@@ -13,16 +9,14 @@ export default function(state = initialState, action) {
         apartments: action.payload.apartments
       };
     }
-    case CREATE_APARTMENTS:
-      return {
-        ...state,
-        apartments: [...state.apartments, action.payload.apartment]
-      };
+
     case GET_APARTMENT_ROOMS_BY_ID: {
-      console.log(action.payload.test);
       return {
         ...state,
-        currentApartmentRooms: action.payload.test
+        currentApartment: {
+          rooms: action.payload.data,
+          id: action.payload.id
+        }
       };
     }
 

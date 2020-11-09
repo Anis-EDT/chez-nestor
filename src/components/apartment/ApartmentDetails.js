@@ -2,14 +2,17 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { List, message, Spin, Typography } from 'antd';
+import { List, message, Spin, Typography, Button, Breadcrumb } from 'antd';
 import './Apartment.scss';
 import { getApartmentRoomsById } from '../../actions/apartment';
 import InfiniteScroll from 'react-infinite-scroller';
+import { useHistory } from 'react-router-dom';
 
 const { Title } = Typography;
 
 const ApartmentDetails = props => {
+  const history = useHistory();
+
   const apartment = props.location.state.apartment;
   useEffect(() => {
     props.getApartmentRoomsById(apartment.id);
@@ -17,8 +20,10 @@ const ApartmentDetails = props => {
   const [loading, setloading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
 
-  const apartmentRooms = props.apartmentReducer.currentApartmentRooms;
-
+  const apartmentRooms = props.apartmentReducer.currentApartment.rooms;
+  const createRoom = () => {
+    history.push('/createRoom');
+  };
   const handleInfiniteOnLoad = data => {
     setHasMore(true);
     if (data.length > 5) {
@@ -31,7 +36,13 @@ const ApartmentDetails = props => {
   // eslint-disable-next-line react/prop-types
   return (
     <div className="apartment-details-container">
+      <Breadcrumb>
+        <Breadcrumb.Item>Accueil</Breadcrumb.Item>
+        <Breadcrumb.Item>Appartements</Breadcrumb.Item>
+        <Breadcrumb.Item>Détails</Breadcrumb.Item>
+      </Breadcrumb>
       <Title>Découvrez les chambre disponibles de l&apos;apartement</Title>
+
       <List.Item>
         <List.Item.Meta
           title={apartment.name}
@@ -47,6 +58,12 @@ const ApartmentDetails = props => {
               useWindow={false}
               className="apartment-details-infinite-container"
             >
+              <div className="confirm-button-container">
+                <Button type="primary" onClick={() => createRoom()}>
+                  Ajouter une chambre
+                </Button>
+              </div>
+
               <List
                 dataSource={apartmentRooms}
                 renderItem={(item, key) => (
