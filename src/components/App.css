@@ -1,2 +1,5 @@
 /* Adding antd css to cascade threw the app*/
 @import "~antd/dist/antd.css";
+.ant-layout-content {
+  min-height: calc(100vh - 135px) !important;
+}

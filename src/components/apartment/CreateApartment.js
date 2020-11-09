@@ -50,7 +50,6 @@ const createApartment = props => {
   const onFinish = values => {
     // Verify that room form is created
     if (inputFields.length > 0) {
-      console.log('success');
       const apartment = { ...values, rooms: inputFields };
       props
         .addApartment(apartment)
@@ -62,7 +61,6 @@ const createApartment = props => {
           Dialog.toast(Dialog.FAILURE, 'ERREUR ', e);
         });
     } else {
-      console.log('failure');
       Dialog.toast(
         Dialog.WARNING,
         'Un apartement contient au moins une chambre'

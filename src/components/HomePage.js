@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { getApartments } from './../actions/apartment';
 import { Breadcrumb, Button, Spin, Typography } from 'antd';
 import ApartmentList from './apartment/ApartmentList';
-//import * as Dialog from '../shared/Dialog';
 //import PropTypes from 'prop-types';
 import './HomePage.scss';
 
