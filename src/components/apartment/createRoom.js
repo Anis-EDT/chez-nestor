@@ -38,7 +38,6 @@ const createRoom = props => {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item>Accueil</Breadcrumb.Item>
         <Breadcrumb.Item>Appartements</Breadcrumb.Item>
         <Breadcrumb.Item>Chambre</Breadcrumb.Item>
         <Breadcrumb.Item>Ajout</Breadcrumb.Item>

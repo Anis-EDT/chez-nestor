@@ -37,7 +37,6 @@ const ApartmentDetails = props => {
   return (
     <div className="apartment-details-container">
       <Breadcrumb>
-        <Breadcrumb.Item>Accueil</Breadcrumb.Item>
         <Breadcrumb.Item>Appartements</Breadcrumb.Item>
         <Breadcrumb.Item>Détails</Breadcrumb.Item>
       </Breadcrumb>

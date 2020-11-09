@@ -29,7 +29,6 @@ const HomePage = props => {
     <div>
       <div className="container-header">
         <Breadcrumb>
-          <Breadcrumb.Item>Accueil</Breadcrumb.Item>
           <Breadcrumb.Item>Appartements</Breadcrumb.Item>
         </Breadcrumb>
         <Button type="primary" onClick={() => createApartment()}>

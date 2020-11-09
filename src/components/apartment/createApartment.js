@@ -48,20 +48,26 @@ const createApartment = props => {
   };
 
   const onFinish = values => {
-    // Verify that room form is created , and that the fields are not empty
-    if (inputFields.length === 0)
-      if (!inputFields.some(el => el === '')) {
-        const apartment = { ...values, rooms: inputFields };
-        props
-          .addApartment(apartment)
-          .then(() => {
-            history.push('/');
-            Dialog.toast(Dialog.SUCCESS, 'succés');
-          })
-          .catch(e => {
-            Dialog.toast(Dialog.FAILURE, 'ERREUR ', e);
-          });
-      } else Dialog.toast(Dialog.FAILURE, 'Chambre non saisie');
+    // Verify that room form is created
+    if (inputFields.length > 0) {
+      console.log('success');
+      const apartment = { ...values, rooms: inputFields };
+      props
+        .addApartment(apartment)
+        .then(() => {
+          history.push('/');
+          Dialog.toast(Dialog.SUCCESS, 'succés');
+        })
+        .catch(e => {
+          Dialog.toast(Dialog.FAILURE, 'ERREUR ', e);
+        });
+    } else {
+      console.log('failure');
+      Dialog.toast(
+        Dialog.WARNING,
+        'Un apartement contient au moins une chambre'
+      );
+    }
   };
   const onFinishFailed = errorInfo => {
     Dialog.toast(Dialog.FAILURE, errorInfo);
@@ -70,7 +76,6 @@ const createApartment = props => {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item>Accueil</Breadcrumb.Item>
         <Breadcrumb.Item>Appartements</Breadcrumb.Item>
         <Breadcrumb.Item>Ajout</Breadcrumb.Item>
       </Breadcrumb>
