@@ -146,7 +146,7 @@ const createApartment = props => {
               <fieldset>
                 <Form.Item
                   label="numéro"
-                  name="number"
+                  name={`number${index}`}
                   rules={[
                     {
                       required: true,
@@ -165,7 +165,7 @@ const createApartment = props => {
                 </Form.Item>
                 <Form.Item
                   label="région"
-                  name="area"
+                  name={`area${index}`}
                   rules={[
                     {
                       required: true,
@@ -184,7 +184,7 @@ const createApartment = props => {
                 </Form.Item>
                 <Form.Item
                   label="prix"
-                  name="price"
+                  name={`price${index}`}
                   rules={[
                     {
                       required: true,
