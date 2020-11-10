@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +6,7 @@ import { Form, Input, Button, Breadcrumb, Typography, DatePicker } from 'antd';
 import { addClient } from '../../actions/client';
 
 import * as Dialog from '../../shared/Dialog';
-
+import PropTypes from 'prop-types';
 const { Title } = Typography;
 
 const CreateClient = props => {
@@ -134,6 +133,10 @@ const CreateClient = props => {
     </>
   );
 };
+CreateClient.propTypes = {
+  addClient: PropTypes.func.isRequired
+};
+
 const mapDispatchToProps = {
   addClient
 };

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { getApartments } from './../actions/apartment';
 import { Breadcrumb, Button, Spin, Typography } from 'antd';
 import ApartmentList from './apartment/ApartmentList';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './HomePage.scss';
 
 const { Title } = Typography;
@@ -43,9 +42,10 @@ const HomePage = props => {
     </div>
   );
 };
-//HomePage.propTypes = {
-//dispatch: PropTypes.any
-//};
+HomePage.propTypes = {
+  apartmentReducer: PropTypes.object.isRequired,
+  getApartments: PropTypes.func.isRequired
+};
 const mapDispatchToProps = {
   getApartments
 };

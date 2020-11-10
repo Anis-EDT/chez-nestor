@@ -1,12 +1,11 @@
+//this eslint disable is mandatory when using certain antd components
 /* eslint-disable react/display-name */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 
-//import intl from 'react-intl-universal';
 import {
   Breadcrumb,
   Button,
@@ -17,8 +16,7 @@ import {
   Table
 } from 'antd';
 import { getBookings } from './../../actions/booking';
-//import * as Dialog from '../shared/Dialog';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const { Title } = Typography;
 
@@ -124,11 +122,7 @@ const BookingList = props => {
       price: price
     };
   });
-  const createBooking = () => {
-    history.push('/createBooking');
-  };
   const viewDetails = booking => {
-    console.log('azebi', booking);
     history.push('/bookingDetails', {
       booking: booking
     });
@@ -172,9 +166,6 @@ const BookingList = props => {
         <Breadcrumb>
           <Breadcrumb.Item>Réservations</Breadcrumb.Item>
         </Breadcrumb>
-        <Button type="primary" onClick={() => createBooking()}>
-          Ajouter une réservation
-        </Button>
       </div>
       <Title>Liste des réservations : </Title>
       <Table columns={columns} dataSource={processedBookings} />;
@@ -185,9 +176,14 @@ const BookingList = props => {
     </div>
   );
 };
-//HomePage.propTypes = {
-//dispatch: PropTypes.any
-//};
+BookingList.propTypes = {
+  getBookings: PropTypes.func.isRequired,
+  bookingReducer: PropTypes.object.isRequired,
+  setSelectedKeys: PropTypes.func.isRequired,
+  selectedKeys: PropTypes.string.isRequired,
+  confirm: PropTypes.func.isRequired,
+  clearFilters: PropTypes.func.isRequired
+};
 const mapDispatchToProps = {
   getBookings
 };

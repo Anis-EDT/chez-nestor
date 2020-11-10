@@ -1,11 +1,10 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { Form, Input, Button, Breadcrumb, Typography } from 'antd';
 import { addRoom } from '../../actions/apartment';
-
+import PropTypes from 'prop-types';
 import * as Dialog from '../../shared/Dialog';
 
 const { Title } = Typography;
@@ -104,6 +103,11 @@ const createRoom = props => {
       </Form>
     </>
   );
+};
+
+createRoom.propTypes = {
+  apartmentReducer: PropTypes.object.isRequired,
+  addRoom: PropTypes.func.isRequired
 };
 const mapDispatchToProps = {
   addRoom

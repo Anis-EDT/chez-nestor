@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -20,6 +19,7 @@ import * as Dialog from '../../shared/Dialog';
 
 import InfiniteScroll from 'react-infinite-scroller';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const { Title } = Typography;
 
@@ -47,7 +47,6 @@ const ApartmentDetails = props => {
 
   const apartmentRooms = props.apartmentReducer.currentRooms;
   const clients = props.clientReducer.clients;
-  console.log('ROOOOOms', apartmentRooms);
 
   const createRoom = () => {
     history.push('/createRoom');
@@ -64,16 +63,14 @@ const ApartmentDetails = props => {
   const bookRoomByClient = clientId => {
     props
       .bookRoom(clientId, selectedRoom)
-      .then(result => {
-        console.log(result);
+      .then(() => {
         history.push('/');
-        Dialog.toast(Dialog.SUCCESS, 'succés');
+        Dialog.toast(Dialog.SUCCESS, 'succés chambré réservé');
       })
       .catch(e => {
         Dialog.toast(Dialog.FAILURE, 'ERREUR ', e);
       });
   };
-  // eslint-disable-next-line react/prop-types
   return (
     <div className="apartment-details-container">
       <Breadcrumb>
@@ -174,9 +171,17 @@ const ApartmentDetails = props => {
     </div>
   );
 };
-//HomePage.propTypes = {
-//dispatch: PropTypes.any
-//};
+ApartmentDetails.propTypes = {
+  location: PropTypes.object.isRequired,
+
+  getApartmentRoomsById: PropTypes.func.isRequired,
+  getRooms: PropTypes.func.isRequired,
+  getClients: PropTypes.func.isRequired,
+  bookRoom: PropTypes.func.isRequired,
+
+  apartmentReducer: PropTypes.object.isRequired,
+  clientReducer: PropTypes.object.isRequired
+};
 
 const mapDispatchToProps = {
   getApartmentRoomsById,

@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { Card, Row, Col } from 'antd';
 import './Apartment.scss';
@@ -8,7 +8,6 @@ import './Apartment.scss';
 const { Meta } = Card;
 const ApartmentList = props => {
   const history = useHistory();
-  // eslint-disable-next-line react/prop-types
   const viewDetails = apartment => {
     history.push('/ApartmentDetails', {
       apartment: apartment
@@ -37,8 +36,8 @@ const ApartmentList = props => {
     </Row>
   );
 };
-//HomePage.propTypes = {
-//dispatch: PropTypes.any
-//};
+ApartmentList.propTypes = {
+  apartments: PropTypes.array.isRequired
+};
 
 export default ApartmentList;

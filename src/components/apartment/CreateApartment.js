@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -6,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Form, Input, Button, Breadcrumb, Typography } from 'antd';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { addApartment } from '../../actions/apartment';
-
+import PropTypes from 'prop-types';
 import * as Dialog from '../../shared/Dialog';
 
 const { Title } = Typography;
@@ -236,6 +235,10 @@ const createApartment = props => {
     </>
   );
 };
+createApartment.propTypes = {
+  addApartment: PropTypes.func.isRequired
+};
+
 const mapDispatchToProps = {
   addApartment
 };

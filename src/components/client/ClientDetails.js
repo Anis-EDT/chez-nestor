@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Typography, Breadcrumb, Descriptions } from 'antd';
 import { getClientById } from '../../actions/client';
+import PropTypes from 'prop-types';
 
 const { Title } = Typography;
 
@@ -15,7 +15,6 @@ const ClientDetails = props => {
 
   const client = props.clientReducer.currentClient;
 
-  // eslint-disable-next-line react/prop-types
   return (
     <div className="client-details-container">
       <Breadcrumb>
@@ -38,9 +37,11 @@ const ClientDetails = props => {
     </div>
   );
 };
-//HomePage.propTypes = {
-//dispatch: PropTypes.any
-//};
+ClientDetails.propTypes = {
+  location: PropTypes.object.isRequired,
+  getClientById: PropTypes.func.isRequired,
+  clientReducer: PropTypes.object.isRequired
+};
 
 const mapDispatchToProps = {
   getClientById
