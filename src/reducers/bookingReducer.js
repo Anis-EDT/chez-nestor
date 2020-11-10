@@ -13,7 +13,7 @@ export default function(state = initialState, action) {
     case GET_BOOKING_BY_ID: {
       console.log('reducer ', action.payload.booking, action.payload);
       return {
-        bookings: state.bookings,
+        ...state,
         currentBooking: action.payload.booking
       };
     }

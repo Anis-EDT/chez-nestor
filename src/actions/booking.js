@@ -31,7 +31,6 @@ export const getBookingById = id => async dispatch => {
   const path = `${API_ENDPOINT}/booking/${id}`;
   try {
     const res = await axios.get(path);
-    console.log('rez', res);
     dispatch({
       type: GET_BOOKING_BY_ID,
       payload: res.data
@@ -48,12 +47,10 @@ export const getBookingById = id => async dispatch => {
 
  * Book a room
  */
-export const addBooking = payload => async dispatch => {
+export const bookRoom = (clientId, roomId) => async dispatch => {
   const path = `${API_ENDPOINT}/booking`;
   try {
-    console.log('payload', payload);
-    const res = await axios.post(path, payload);
-    console.log('res', res);
+    await axios.post(path, { clientId: clientId, roomId: roomId });
   } catch (e) {
     dispatch({
       type: ERROR,

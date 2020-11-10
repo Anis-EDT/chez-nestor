@@ -2,7 +2,8 @@ import { API_ENDPOINT } from '../config';
 import {
   GET_APARTMENTS,
   ERROR,
-  GET_APARTMENT_ROOMS_BY_ID
+  GET_APARTMENT_ROOMS_BY_ID,
+  GET_ROOMS
 } from './../constants/types';
 
 import axios from 'axios';
@@ -37,6 +38,25 @@ export const getApartmentRoomsById = id => async dispatch => {
     dispatch({
       type: GET_APARTMENT_ROOMS_BY_ID,
       payload: { data: res.data.test, id: id }
+    });
+  } catch (e) {
+    dispatch({
+      type: ERROR,
+      payload: console.log(e)
+    });
+  }
+};
+/**
+
+ * Gets all rooms
+ */
+export const getRooms = () => async dispatch => {
+  const path = `${API_ENDPOINT}/room`;
+  try {
+    const res = await axios.get(path);
+    dispatch({
+      type: GET_ROOMS,
+      payload: res.data
     });
   } catch (e) {
     dispatch({

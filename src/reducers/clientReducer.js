@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
 
     case GET_CLIENT_BY_ID: {
       return {
-        clients: state.clients,
+        ...state,
         currentClient: action.payload.client
       };
     }

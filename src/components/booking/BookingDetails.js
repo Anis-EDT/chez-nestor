@@ -14,7 +14,6 @@ const BookingDetails = props => {
   }, []);
 
   const booking = props.bookingReducer.currentBooking;
-  console.log('bb', booking);
 
   // eslint-disable-next-line react/prop-types
   return (

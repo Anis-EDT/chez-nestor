@@ -2,9 +2,22 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { List, message, Spin, Typography, Button, Breadcrumb } from 'antd';
+import {
+  List,
+  message,
+  Spin,
+  Typography,
+  Button,
+  Breadcrumb,
+  Modal
+} from 'antd';
 import './Apartment.scss';
-import { getApartmentRoomsById } from '../../actions/apartment';
+import { getApartmentRoomsById, getRooms } from '../../actions/apartment';
+import { getClients } from '../../actions/client';
+import { bookRoom } from '../../actions/booking';
+
+import * as Dialog from '../../shared/Dialog';
+
 import InfiniteScroll from 'react-infinite-scroller';
 import { useHistory } from 'react-router-dom';
 
@@ -16,11 +29,26 @@ const ApartmentDetails = props => {
   const apartment = props.location.state.apartment;
   useEffect(() => {
     props.getApartmentRoomsById(apartment.id);
+    props.getRooms();
+    props.getClients();
   }, []);
   const [loading, setloading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState('');
 
-  const apartmentRooms = props.apartmentReducer.currentApartment.rooms;
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleModalOk = () => {
+    setVisible(false);
+  };
+
+  const apartmentRooms = props.apartmentReducer.currentRooms;
+  const clients = props.clientReducer.clients;
+  console.log('ROOOOOms', apartmentRooms);
+
   const createRoom = () => {
     history.push('/createRoom');
   };
@@ -32,6 +60,18 @@ const ApartmentDetails = props => {
       setloading(false);
       return;
     }
+  };
+  const bookRoomByClient = clientId => {
+    props
+      .bookRoom(clientId, selectedRoom)
+      .then(result => {
+        console.log(result);
+        history.push('/');
+        Dialog.toast(Dialog.SUCCESS, 'succés');
+      })
+      .catch(e => {
+        Dialog.toast(Dialog.FAILURE, 'ERREUR ', e);
+      });
   };
   // eslint-disable-next-line react/prop-types
   return (
@@ -55,7 +95,7 @@ const ApartmentDetails = props => {
               loadMore={handleInfiniteOnLoad}
               hasMore={!loading && hasMore}
               useWindow={false}
-              className="apartment-details-infinite-container"
+              className="apartment-details-infinite-container infinite-container"
             >
               <div className="confirm-button-container">
                 <Button type="primary" onClick={() => createRoom()}>
@@ -71,8 +111,19 @@ const ApartmentDetails = props => {
                       title={`région : ${item.area}`}
                       description={`numéro: ${item.number}`}
                     />
-                    <div className="apartment-details-price">
-                      prix : {item.price}
+                    <div className="apartment-details-booking">
+                      <div className="apartment-details-price">
+                        prix : {item.price}
+                      </div>
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          showModal();
+                          setSelectedRoom(item.id);
+                        }}
+                      >
+                        Réserver
+                      </Button>
                     </div>
                   </List.Item>
                 )}
@@ -91,6 +142,35 @@ const ApartmentDetails = props => {
           </div>
         }
       </List.Item>
+      <Modal title="Basic Modal" visible={visible} onOk={handleModalOk}>
+        <InfiniteScroll
+          initialLoad={false}
+          pageStart={0}
+          loadMore={handleInfiniteOnLoad}
+          hasMore={!loading && hasMore}
+          useWindow={false}
+          className="infinite-container"
+        >
+          <List
+            dataSource={clients}
+            renderItem={(item, key) => (
+              <List.Item key={key}>
+                <List.Item.Meta title={`${item.firstName} ${item.lastName}`} />
+                <div className="apartment-details-booking">
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      bookRoomByClient(item.id);
+                    }}
+                  >
+                    Confirmer
+                  </Button>
+                </div>
+              </List.Item>
+            )}
+          ></List>
+        </InfiniteScroll>
+      </Modal>
     </div>
   );
 };
@@ -99,7 +179,10 @@ const ApartmentDetails = props => {
 //};
 
 const mapDispatchToProps = {
-  getApartmentRoomsById
+  getApartmentRoomsById,
+  getRooms,
+  getClients,
+  bookRoom
 };
 const mapStateToProps = state => ({
   ...state

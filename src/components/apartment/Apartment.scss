@@ -3,12 +3,14 @@
   margin: 20px !important;
 }
 .apartment-details-infinite-container {
+  width: 60%;
+}
+.infinite-container {
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   overflow: auto;
   padding: 8px 24px;
   height: 300px;
-  width: 60%;
 }
 .apartment-details-loading-container {
   position: absolute;
@@ -19,7 +21,7 @@
 .ant-list-item {
   display: block !important;
 }
-.apartment-details-price {
+.apartment-details-booking {
   display: flex;
   justify-content: flex-end;
 }
@@ -32,4 +34,7 @@
 }
 .form-handler-buton-wrapper {
   margin: 15px;
+}
+.apartment-details-price {
+  margin: auto 10px;
 }

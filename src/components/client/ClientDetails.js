@@ -9,7 +9,6 @@ const { Title } = Typography;
 
 const ClientDetails = props => {
   const clientId = props.location.state.client;
-
   useEffect(() => {
     props.getClientById(clientId);
   }, []);
